@@ -1,18 +1,21 @@
+##################################################################################
+# VARIABLES
+##################################################################################
 
 variable "region" {
   type        = string
-  description = "(Optional) AWS Region to deploy in. Defaults to us-east-1."
+  description = "(Optional) AWS Region to use. Default: ap-southeast-2"
   default     = "ap-southeast-2"
 }
 
 variable "prefix" {
   type        = string
-  description = "(Required) Prefix to use for all resources in this module."
+  description = "(Optional) Prefix to use for all resources in this module. Default: globo-dev"
 }
 
 variable "environment" {
   type        = string
-  description = "(Required) Environment of all resources"
+  description = "(Optional) Environment to use for all resources in this module. Default: dev"
 }
 
 variable "billing_code" {
@@ -20,31 +23,13 @@ variable "billing_code" {
   description = "(Required) Billing code for network resources"
 }
 
-# Application variables
-
-variable "ip_range" {
-  default = "0.0.0.0/0"
-}
-
-variable "instance_type" {
+variable "cidr_block" {
   type        = string
-  description = "(Optional) EC2 Instance type to use for web app. Defaults to t3.micro."
-  default     = "t3.micro"
-}
-
-variable "api_key" {
-  type        = string
-  description = "(Required) API key for web app to talk to SaaS platform."
+  description = "(Optional) The CIDR block for the VPC. Default:10.42.0.0/16"
 }
 
 variable "public_subnets" {
-  type        = list(string)
-  description = "(Required) List of subnet IDs for EC2 instance deployments."
+  type        = map(string)
+  description = "(Optional) Map of public subnets to create with CIDR blocks. Key will be used as subnet name with prefix. Default: {subnet-1 ="
 }
-
-variable "vpc_id" {
-  type        = string
-  description = "(Required) VPC ID of VPC for application deployment."
-}
-
 
