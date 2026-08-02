@@ -1,21 +1,18 @@
-##################################################################################
-# VARIABLES
-##################################################################################
 
 variable "region" {
   type        = string
-  description = "(Optional) AWS Region to use. Default: ap-southeast-2"
+  description = "(Optional) AWS Region to deploy in. Defaults to ap-southeast-2."
   default     = "ap-southeast-2"
 }
 
 variable "prefix" {
   type        = string
-  description = "(Optional) Prefix to use for all resources in this module. Default: globo-dev"
+  description = "(Required) Prefix to use for all resources in this module."
 }
 
 variable "environment" {
   type        = string
-  description = "(Optional) Environment to use for all resources in this module. Default: dev"
+  description = "(Required) Environment of all resources"
 }
 
 variable "billing_code" {
@@ -23,13 +20,31 @@ variable "billing_code" {
   description = "(Required) Billing code for network resources"
 }
 
-variable "cidr_block" {
-  type        = string
-  description = "(Optional) The CIDR block for the VPC. Default:10.42.0.0/16"
+# Application variables
+
+variable "ip_range" {
+  default = "0.0.0.0/0"
 }
 
-variable "public_subnets" {
-  type        = map(string)
-  description = "(Optional) Map of public subnets to create with CIDR blocks. Key will be used as subnet name with prefix. Default: {subnet-1 ="
+variable "instance_type" {
+  type        = string
+  description = "(Optional) EC2 Instance type to use for web app. Defaults to t3.micro."
+  default     = "t3.micro"
 }
+
+variable "api_key" {
+  type        = string
+  description = "(Required) API key for web app to talk to SaaS platform."
+}
+
+variable "tfe_organization" {
+  type        = string
+  description = "(Required) List of subnet IDs for EC2 instance deployments."
+}
+
+variable "tfe_workspace_name" {
+  type        = string
+  description = "(Required) Name of the TFE workspace for application deployment."
+}
+
 
