@@ -1,11 +1,13 @@
-output "public_lb_dns" {
-  value = aws_lb.main.dns_name
+##################################################################################
+# OUTPUT
+##################################################################################
+
+output "vpc_id" {
+  value       = module.main.vpc_id
+  description = "VPC ID"
 }
 
-output "webapp_instance0_public_ip" {
-  value = aws_instance.main[0].public_ip
-}
-
-output "private_key_pem" {
-  value = nonsensitive(module.ssh_keys.private_key_pem)
+output "public_subnets" {
+  value       = module.main.public_subnets
+  description = "List of public subnets"
 }
